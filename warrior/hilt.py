@@ -52,6 +52,7 @@ class Pin:
         self.hilt.pwm_channels[self] = None
         selector = f"{self.slot - 1}{self.pin}"
         self.hilt.write(f";e{selector}{1 if value else 0};".encode('ascii'))
+        time.sleep(0.01)
 
 class AnalogPin(Pin):
     def __init__(self, hilt, slot, number):
@@ -96,6 +97,7 @@ class PPSPin(AnalogPin):
             ui.print_log(f"Invalid analog output voltage {voltage}.")
         value = int(voltage * 99 // 5)
         self.hilt.write(f";b{selector}{channel}{value:02d};".encode('ascii'))
+        time.sleep(0.01)
 
 @dataclass
 class Slot:

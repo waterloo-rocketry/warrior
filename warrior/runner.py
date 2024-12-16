@@ -56,6 +56,8 @@ class TestRunner:
                             time.sleep(1)
                     self.execute(test)
         except KeyboardInterrupt:
+            ui.print_log(" Interrupted, cleaning up...\n")
+            time.sleep(0.1)
             # Run nominal tests to clean up
             for nominal in self.nominal_tests:
                 self.execute(nominal)
